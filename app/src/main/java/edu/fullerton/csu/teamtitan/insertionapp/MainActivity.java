@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     protected static final int MAX_NUM = 8;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) 
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -39,11 +40,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    protected void cmdQuitAction(View v) {
+    protected void cmdQuitAction(View v) 
+    {
         createConfirmationDialog("Are you sure you want to exit?");
     }
 
-    protected void cmdInsertionSort(View v) {
+    protected void cmdInsertionSort(View v) 
+    {
         EditText txtInput = (EditText)findViewById(R.id.txtInput);
         TextView lblInputOutput = (TextView)findViewById(R.id.lblInputOutput);
         TextView lblErrorMsg = (TextView)findViewById(R.id.lblErrorMsg);
@@ -80,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
                 resetElements();
             }
         } else {
-//            this.createDialog("Please enter numbers between 0 and 9.");
-            lblErrorMsg.setText("Please enter numbers between 0 and 9.");
+            this.createDialog("Please enter numbers between 0 and 9.");
+            //lblErrorMsg.setText("Please enter numbers between 0 and 9.");
             txtInput.setText("");
             resetElements();
         }
@@ -109,7 +112,8 @@ public class MainActivity extends AppCompatActivity {
         printArray(masterString.toString().trim());
     }
 
-    protected String formatArray(int[] numbers, int boldPosition) {
+    protected String formatArray(int[] numbers, int boldPosition) 
+    {
         StringBuilder sb = new StringBuilder();
 
         for (int i=0; i < numbers.length; i++) {
@@ -123,7 +127,8 @@ public class MainActivity extends AppCompatActivity {
         return sb.toString().trim();
     }
 
-    protected void printArray(String output) {
+    protected void printArray(String output) 
+    {
         TextView lblResults = (TextView)findViewById(R.id.lblResults);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             lblResults.setText(Html.fromHtml(output.toString().trim(),Html.FROM_HTML_MODE_LEGACY));
@@ -132,7 +137,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    protected Boolean validateInput(int[] inputs) {
+    protected Boolean validateInput(int[] inputs) 
+    {
         Boolean flag = Boolean.TRUE;
 
         for (int num: inputs) {
@@ -147,7 +153,8 @@ public class MainActivity extends AppCompatActivity {
         return flag;
     }
 
-    protected void createConfirmationDialog(String msg) {
+    protected void createConfirmationDialog(String msg) 
+    {
         Dialog dialog = null;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(msg)
@@ -179,7 +186,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    protected void createDialog(String msg) {
+    protected void createDialog(String msg) 
+    {
         Dialog dialog = null;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(msg)
@@ -197,7 +205,8 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    protected void resetElements() {
+    protected void resetElements() 
+    {
         TextView lblInputOutput = (TextView)findViewById(R.id.lblInputOutput);
         TextView lblResults = (TextView)findViewById(R.id.lblResults);
 
