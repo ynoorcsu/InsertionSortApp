@@ -51,7 +51,7 @@
         android:layout_below="@+id/btnSort"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="35px" />
+        android:textSize="@dimen/abc_text_size_medium_material" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
         android:layout_below="@+id/lblInputOutput"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="37px" />
+        android:textSize="@dimen/abc_text_size_medium_material" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                             return cs;
                         }
                         if(cs.toString().matches("[0-9 ]+")){
-                            return cs + " ".toString();
+                            return cs;
                         }
                         return "";
                     }
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         int temp;
 
         StringBuilder masterString = new StringBuilder();
-        masterString.append(formatArray(input, -1) + "<br/>");
+        masterString.append(formatArray(input, 1) + "<br/>");
 
         for (int i = 1; i < input.length; i++) {
             for(int j = i ; j > 0 ; j--){
@@ -108,7 +108,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            masterString.append(formatArray(input, i) + "<br/>");
+            if (i < input.length) {
+                masterString.append(formatArray(input, i + 1) + "<br/>");
+            } else {
+                masterString.append(formatArray(input, -1) + "<br/>");
+            }
+
         }
 
         printArray(masterString.toString().trim());
@@ -118,8 +123,8 @@ public class MainActivity extends AppCompatActivity {
     {
         StringBuilder sb = new StringBuilder();
 
-        for (int i=0; i < numbers.length; i++) {
-            if (i == boldPosition && i+1 < numbers.length) {
+        for (int i = 0; i < numbers.length; i++) {
+            if (i == boldPosition) {
                 sb.append("<strong>" + numbers[i] + "</strong> ");
             } else {
                 sb.append(numbers[i] + " ");
