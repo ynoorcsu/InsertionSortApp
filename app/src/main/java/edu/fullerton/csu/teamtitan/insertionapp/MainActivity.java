@@ -16,6 +16,10 @@ import android.text.Html;
 public class MainActivity extends AppCompatActivity {
     protected static final int MIN_NUM = 2;
     protected static final int MAX_NUM = 8;
+    protected static final String CONFIRM_MSG = "Are you sure you want to exit?";
+    protected static final String MSG_MIN_INPUT_SIZE = "Please enter at least 2 numbers between 0 and 9.";
+    protected static final String MSG_MAX_INPUT_SIZE = "Please enter no more than 8 numbers between 0 and 9.";
+    protected static final String MSG_INPUT_ERROR = "Please enter number from 0 to 9.";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) 
@@ -32,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                             return cs;
                         }
                         if(cs.toString().matches("[0-9 ]+")){
-                            return cs;
+                            return cs + " ".toString();
                         }
                         return "";
                     }
@@ -42,14 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
     protected void cmdQuitAction(View v) 
     {
-        createConfirmationDialog("Are you sure you want to exit?");
+        createConfirmationDialog(CONFIRM_MSG);
     }
 
     protected void cmdInsertionSort(View v) 
     {
         EditText txtInput = (EditText)findViewById(R.id.txtInput);
         TextView lblInputOutput = (TextView)findViewById(R.id.lblInputOutput);
-        TextView lblErrorMsg = (TextView)findViewById(R.id.lblErrorMsg);
 
         resetElements();
 
@@ -69,22 +72,21 @@ public class MainActivity extends AppCompatActivity {
 
             if (this.validateInput(inputArrayInt)) {
                 if (size < MIN_NUM) {
-                    createDialog("Please enter at least 2 numbers between 0 and 9.");
+                    createDialog(MSG_MIN_INPUT_SIZE);
                     resetElements();
                 } else if (size > MAX_NUM) {
-                    createDialog("Please enter no more than 8 numbers between 0 and 9.");
+                    createDialog(MSG_MAX_INPUT_SIZE);
                     resetElements();
                 } else {
                     lblInputOutput.setText(txtInput.getText().toString());
                     insertionSort(inputArrayInt);
                 }
             } else {
-                createDialog("Please enter number from 0 to 9.");
+                createDialog(MSG_INPUT_ERROR);
                 resetElements();
             }
         } else {
-            this.createDialog("Please enter numbers between 0 and 9.");
-            //lblErrorMsg.setText("Please enter numbers between 0 and 9.");
+            this.createDialog(MSG_MIN_INPUT_SIZE);
             txtInput.setText("");
             resetElements();
         }
