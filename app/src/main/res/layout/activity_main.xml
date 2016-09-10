@@ -29,7 +29,8 @@
         android:textSize="@dimen/abc_text_size_medium_material"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textStyle="bold" />
 
     <Button
         android:layout_width="wrap_content"
@@ -49,7 +50,8 @@
         android:id="@+id/lblInputArray"
         android:layout_below="@+id/btnSort"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="35px" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -82,7 +84,8 @@
         android:id="@+id/lblSteps"
         android:layout_below="@+id/lblInputOutput"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="37px" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -112,6 +115,7 @@
         android:layout_below="@+id/lblNumbers"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="#fb0303" />
+        android:textColor="#047e0b"
+        android:textStyle="italic" />
 
 </RelativeLayout>

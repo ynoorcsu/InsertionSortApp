@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                             return cs;
                         }
                         if(cs.toString().matches("[0-9 ]+")){
-                            return cs;
+                            return cs + " ".toString();
                         }
                         return "";
                     }
