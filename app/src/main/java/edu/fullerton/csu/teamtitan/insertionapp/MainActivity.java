@@ -7,10 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.text.Html;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,20 +30,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText txtInput = (EditText)findViewById(R.id.txtInput);
-        txtInput.setFilters(new InputFilter[] {
-                new InputFilter() {
-                    @Override
-                    public CharSequence filter(CharSequence cs, int start, int end, Spanned spanned, int dStart, int dEnd) {
-                        if(cs.equals("")){ // for backspace
-                            return cs;
-                        }
-                        if(cs.toString().matches("[0-9 ]+")){
-                            return cs;
-                        }
-                        return "";
+        final EditText inputDigits = (EditText)findViewById(R.id.txtInput);
+
+        inputDigits.setFilters(new InputFilter[] {
+            new InputFilter() {
+                @Override
+                public CharSequence filter(CharSequence cs, int start, int end,
+                                           Spanned spanned, int dStart, int dEnd) {
+                    // for backspace
+                    if(cs.equals("")) {
+                        return cs;
                     }
+
+                    if(cs.toString().matches("[0-9]+")) {
+                        return cs + " ".toString();
+                    }
+
+                    if(cs.toString().matches("[ ]?")) {
+                        return cs;
+                    }
+
+                    return "";
                 }
+            }
         });
     }
 
@@ -51,26 +63,17 @@ public class MainActivity extends AppCompatActivity {
 
     protected void cmdInsertionSort(View v) 
     {
-        EditText txtInput = (EditText)findViewById(R.id.txtInput);
-        TextView lblInputOutput = (TextView)findViewById(R.id.lblInputOutput);
+        EditText inputDigits = (EditText)findViewById(R.id.txtInput);
+        TextView lblInputArrayContent = (TextView)findViewById(R.id.lblInputArrayContent);
 
         resetElements();
 
-        if (!txtInput.getText().toString().trim().isEmpty()) {
-            String[] inputArrayString = txtInput.getText().toString().split(" ");
-            int[] inputArrayInt = new int[inputArrayString.length];
+        if (!inputDigits.getText().toString().trim().isEmpty()) {
+            List<Integer> digitList = cleanupInput(inputDigits.getText().toString().split(" "));
+            int[] digits = convertListToInt(digitList);
+            int size = digits.length;
 
-            for(int i = 0; i < inputArrayString.length; i++) {
-                try {
-                    inputArrayInt[i] = Integer.parseInt(inputArrayString[i]);
-                } catch (NumberFormatException e) {
-                    createDialog(e.getMessage());
-                }
-            }
-
-            int size = inputArrayInt.length;
-
-            if (this.validateInput(inputArrayInt)) {
+            if (this.validateInput(digits)) {
                 if (size < MIN_NUM) {
                     createDialog(MSG_MIN_INPUT_SIZE);
                     resetElements();
@@ -78,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
                     createDialog(MSG_MAX_INPUT_SIZE);
                     resetElements();
                 } else {
-                    lblInputOutput.setText(txtInput.getText().toString());
-                    insertionSort(inputArrayInt);
+                    lblInputArrayContent.setText(TextUtils.join(" ", digitList.toArray()));
+                    insertionSort(digits);
                 }
             } else {
                 createDialog(MSG_INPUT_ERROR);
@@ -87,9 +90,38 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             this.createDialog(MSG_MIN_INPUT_SIZE);
-            txtInput.setText("");
+            inputDigits.setText("");
             resetElements();
         }
+    }
+
+    protected List<Integer> cleanupInput(String[] input) {
+        List<Integer> tempList = new ArrayList<Integer>();
+
+        int j = 0;
+        for (int i = 0; i < input.length; i++) {
+            String value = input[i].toString().trim();
+
+            if (!value.isEmpty()) {
+                tempList.add(Integer.parseInt(value.toString()));
+            }
+        }
+
+        return tempList;
+    }
+
+    protected int[] convertListToInt(List<Integer> list) {
+        int[] digits = new int[list.size()];
+
+        for(int i = 0; i < list.size(); i++) {
+            try {
+                digits[i] = list.get(i);
+            } catch (IndexOutOfBoundsException e) {
+                createDialog(e.getMessage());
+            }
+        }
+
+        return digits;
     }
 
     protected void insertionSort(int[] input)
@@ -119,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         printArray(masterString.toString().trim());
     }
 
-    protected String formatArray(int[] numbers, int boldPosition) 
+    protected String formatArray(int[] numbers, int boldPosition)
     {
         StringBuilder sb = new StringBuilder();
 
@@ -144,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    protected Boolean validateInput(int[] inputs) 
+    protected Boolean validateInput(int[] inputs)
     {
         Boolean flag = Boolean.TRUE;
 
@@ -214,10 +246,10 @@ public class MainActivity extends AppCompatActivity {
 
     protected void resetElements() 
     {
-        TextView lblInputOutput = (TextView)findViewById(R.id.lblInputOutput);
+        TextView lblInputArrayContent = (TextView)findViewById(R.id.lblInputArrayContent);
         TextView lblResults = (TextView)findViewById(R.id.lblResults);
 
         lblResults.setText("");
-        lblInputOutput.setText("");
+        lblInputArrayContent.setText("");
     }
 }
