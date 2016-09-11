@@ -110,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Min: 2 numbers, Max: 8 Numbers seperated by spaces"
+        android:text="Min: 2 numbers, Max: 8 numbers seperated by spaces"
         android:id="@+id/textView"
         android:layout_below="@+id/lblNumbers"
         android:layout_alignParentLeft="true"
