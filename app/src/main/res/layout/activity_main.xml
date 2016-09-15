@@ -35,7 +35,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Insertion Sort"
+        android:text="Apply Sort"
         android:id="@+id/btnSort"
         android:onClick="cmdInsertionSort"
         android:layout_below="@+id/txtInput"
