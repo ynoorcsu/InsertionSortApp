@@ -56,9 +56,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    protected void cmdQuitAction(View v) 
+    protected void btnQuit_onclick_action(View v)
     {
         createConfirmationDialog(CONFIRM_MSG);
+    }
+
+    protected void btnClear_onclick_action(View v)
+    {
+        EditText inputDigits = (EditText)findViewById(R.id.txtInput);
+        inputDigits.setText("");
+
+        resetElements();
     }
 
     protected void cmdInsertionSort(View v) 
