@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        toggleLabelDisplay(Boolean.FALSE);
     }
 
     protected void btnQuit_onclick_action(View v)
@@ -66,15 +68,16 @@ public class MainActivity extends AppCompatActivity {
         EditText inputDigits = (EditText)findViewById(R.id.txtInput);
         inputDigits.setText("");
 
-        resetElements();
+        clearContentArea();
+        toggleLabelDisplay(Boolean.FALSE);
     }
 
-    protected void cmdInsertionSort(View v) 
+    protected void cmdApplySort(View v)
     {
         EditText inputDigits = (EditText)findViewById(R.id.txtInput);
         TextView lblInputArrayContent = (TextView)findViewById(R.id.lblInputArrayContent);
 
-        resetElements();
+        clearContentArea();
 
         if (!inputDigits.getText().toString().trim().isEmpty()) {
             List<Integer> digitList = cleanupInput(inputDigits.getText().toString().split(" "));
@@ -84,22 +87,27 @@ public class MainActivity extends AppCompatActivity {
             if (this.validateInput(digits)) {
                 if (size < MIN_NUM) {
                     createDialog(MSG_MIN_INPUT_SIZE);
-                    resetElements();
+                    clearContentArea();
+                    toggleLabelDisplay(Boolean.FALSE);
                 } else if (size > MAX_NUM) {
                     createDialog(MSG_MAX_INPUT_SIZE);
-                    resetElements();
+                    clearContentArea();
+                    toggleLabelDisplay(Boolean.FALSE);
                 } else {
                     lblInputArrayContent.setText(TextUtils.join(" ", digitList.toArray()));
                     insertionSort(digits);
+                    toggleLabelDisplay(Boolean.TRUE);
                 }
             } else {
                 createDialog(MSG_INPUT_ERROR);
-                resetElements();
+                clearContentArea();
+                toggleLabelDisplay(Boolean.FALSE);
             }
         } else {
             this.createDialog(MSG_MIN_INPUT_SIZE);
             inputDigits.setText("");
-            resetElements();
+            clearContentArea();
+            toggleLabelDisplay(Boolean.FALSE);
         }
     }
 
@@ -252,12 +260,26 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    protected void resetElements() 
+    protected void clearContentArea()
     {
         TextView lblInputArrayContent = (TextView)findViewById(R.id.lblInputArrayContent);
         TextView lblResults = (TextView)findViewById(R.id.lblResults);
 
         lblResults.setText("");
         lblInputArrayContent.setText("");
+    }
+
+    protected void toggleLabelDisplay(Boolean display)
+    {
+        TextView lblInputArray = (TextView)findViewById(R.id.lblInputArray);
+        TextView lblSteps = (TextView)findViewById(R.id.lblSteps);
+
+        if (display) {
+            lblInputArray.setVisibility(View.VISIBLE);
+            lblSteps.setVisibility(View.VISIBLE);
+        } else {
+            lblInputArray.setVisibility(View.INVISIBLE);
+            lblSteps.setVisibility(View.INVISIBLE);
+        }
     }
 }
