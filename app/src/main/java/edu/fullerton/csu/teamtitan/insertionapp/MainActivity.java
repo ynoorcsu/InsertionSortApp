@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.text.Html;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        toggleLabelDisplay(Boolean.FALSE);
     }
 
     protected void btnQuit_onclick_action(View v)
@@ -67,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         inputDigits.setText("");
 
         clearContentAreas();
+        toggleLabelDisplay(Boolean.FALSE);
     }
 
     protected void cmdInsertionSort(View v) 
@@ -101,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
             inputDigits.setText("");
             clearContentAreas();
         }
+
+        toggleLabelDisplay(Boolean.TRUE);
     }
 
     protected List<Integer> cleanupInput(String[] input) {
@@ -259,5 +267,19 @@ public class MainActivity extends AppCompatActivity {
 
         lblResults.setText("");
         lblInputArrayContent.setText("");
+    }
+
+    protected void toggleLabelDisplay(Boolean display)
+    {
+        TextView lblInputArray = (TextView)findViewById(R.id.lblInputArray);
+        TextView lblSteps = (TextView)findViewById(R.id.lblSteps);
+
+        if (display) {
+            lblInputArray.setVisibility(View.VISIBLE);
+            lblSteps.setVisibility(View.VISIBLE);
+        } else {
+            lblInputArray.setVisibility(View.INVISIBLE);
+            lblSteps.setVisibility(View.INVISIBLE);
+        }
     }
 }
