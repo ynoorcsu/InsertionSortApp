@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         EditText inputDigits = (EditText)findViewById(R.id.txtInput);
         inputDigits.setText("");
 
-        resetElements();
+        clearContentAreas();
     }
 
     protected void cmdInsertionSort(View v) 
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         EditText inputDigits = (EditText)findViewById(R.id.txtInput);
         TextView lblInputArrayContent = (TextView)findViewById(R.id.lblInputArrayContent);
 
-        resetElements();
+        clearContentAreas();
 
         if (!inputDigits.getText().toString().trim().isEmpty()) {
             List<Integer> digitList = cleanupInput(inputDigits.getText().toString().split(" "));
@@ -84,22 +84,22 @@ public class MainActivity extends AppCompatActivity {
             if (this.validateInput(digits)) {
                 if (size < MIN_NUM) {
                     createDialog(MSG_MIN_INPUT_SIZE);
-                    resetElements();
+                    clearContentAreas();
                 } else if (size > MAX_NUM) {
                     createDialog(MSG_MAX_INPUT_SIZE);
-                    resetElements();
+                    clearContentAreas();
                 } else {
                     lblInputArrayContent.setText(TextUtils.join(" ", digitList.toArray()));
                     insertionSort(digits);
                 }
             } else {
                 createDialog(MSG_INPUT_ERROR);
-                resetElements();
+                clearContentAreas();
             }
         } else {
             this.createDialog(MSG_MIN_INPUT_SIZE);
             inputDigits.setText("");
-            resetElements();
+            clearContentAreas();
         }
     }
 
@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    protected void resetElements() 
+    protected void clearContentAreas()
     {
         TextView lblInputArrayContent = (TextView)findViewById(R.id.lblInputArrayContent);
         TextView lblResults = (TextView)findViewById(R.id.lblResults);
