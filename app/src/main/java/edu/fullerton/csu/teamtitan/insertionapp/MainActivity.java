@@ -12,9 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.text.Html;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         toggleLabelDisplay(Boolean.FALSE);
     }
 
-    protected void cmdInsertionSort(View v) 
+    protected void cmdApplySort(View v)
     {
         EditText inputDigits = (EditText)findViewById(R.id.txtInput);
         TextView lblInputArrayContent = (TextView)findViewById(R.id.lblInputArrayContent);
@@ -91,24 +88,27 @@ public class MainActivity extends AppCompatActivity {
                 if (size < MIN_NUM) {
                     createDialog(MSG_MIN_INPUT_SIZE);
                     clearContentArea();
+                    toggleLabelDisplay(Boolean.FALSE);
                 } else if (size > MAX_NUM) {
                     createDialog(MSG_MAX_INPUT_SIZE);
                     clearContentArea();
+                    toggleLabelDisplay(Boolean.FALSE);
                 } else {
                     lblInputArrayContent.setText(TextUtils.join(" ", digitList.toArray()));
                     insertionSort(digits);
+                    toggleLabelDisplay(Boolean.TRUE);
                 }
             } else {
                 createDialog(MSG_INPUT_ERROR);
                 clearContentArea();
+                toggleLabelDisplay(Boolean.FALSE);
             }
         } else {
             this.createDialog(MSG_MIN_INPUT_SIZE);
             inputDigits.setText("");
             clearContentArea();
+            toggleLabelDisplay(Boolean.FALSE);
         }
-
-        toggleLabelDisplay(Boolean.TRUE);
     }
 
     protected List<Integer> cleanupInput(String[] input) {

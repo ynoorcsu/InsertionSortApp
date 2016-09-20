@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:text="Apply Sort"
         android:id="@+id/btnSort"
-        android:onClick="cmdInsertionSort"
+        android:onClick="cmdApplySort"
         android:layout_below="@+id/txtInput"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
