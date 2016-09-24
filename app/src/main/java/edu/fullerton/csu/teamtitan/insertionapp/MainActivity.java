@@ -84,24 +84,24 @@ public class MainActivity extends AppCompatActivity {
             int[] digits = convertListToInt(digitList);
             int size = digits.length;
 
-            if (this.validateInput(digits)) {
-                if (size < MIN_NUM) {
-                    createDialog(MSG_MIN_INPUT_SIZE);
-                    clearContentArea();
-                    toggleLabelDisplay(Boolean.FALSE);
-                } else if (size > MAX_NUM) {
-                    createDialog(MSG_MAX_INPUT_SIZE);
-                    clearContentArea();
-                    toggleLabelDisplay(Boolean.FALSE);
-                } else {
+            if (size < MIN_NUM) {
+                createDialog(MSG_MIN_INPUT_SIZE);
+                clearContentArea();
+                toggleLabelDisplay(Boolean.FALSE);
+            } else if (size > MAX_NUM) {
+                createDialog(MSG_MAX_INPUT_SIZE);
+                clearContentArea();
+                toggleLabelDisplay(Boolean.FALSE);
+            } else {
+                if (this.validateInput(digits)) {
                     lblInputArrayContent.setText(TextUtils.join(" ", digitList.toArray()));
                     insertionSort(digits);
                     toggleLabelDisplay(Boolean.TRUE);
+                } else {
+                    createDialog(MSG_INPUT_ERROR);
+                    clearContentArea();
+                    toggleLabelDisplay(Boolean.FALSE);
                 }
-            } else {
-                createDialog(MSG_INPUT_ERROR);
-                clearContentArea();
-                toggleLabelDisplay(Boolean.FALSE);
             }
         } else {
             this.createDialog(MSG_MIN_INPUT_SIZE);
