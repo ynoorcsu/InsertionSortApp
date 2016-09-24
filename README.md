@@ -1,2 +1,3 @@
-#InsertionSort App
-This is a simple insertion sort app.
+#InsertionSort App 
+This is a Simple Insertion Sort App.
+Edited For Code Review.
